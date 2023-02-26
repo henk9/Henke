@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "6bfcc5ce-a01d-4ff4-ba2e-9dbc06ce6a82",
+		"name": "MusicBands",
+		"description": "See the documentation of the `Dummy-request`.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Dummy-request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const lock = setTimeout(() => {}, 43210);\r",
+							"const albumsArray = [];\r",
+							"const urlsArray = [];\r",
+							"const urlOuter = 'https://musicbrainz.org/ws/2/artist/' +\r",
+							"  pm.collectionVariables.get('MBID') + '?fmt=json&inc=url-rels+release-groups';\r",
+							"pm.sendRequest(urlOuter, (_, responseO) => {\r",
+							"  const bandName = responseO.json().name;\r",
+							"  const albums = responseO.json()['release-groups'];\r",
+							"  for (const item of albums) {\r",
+							"    albumsArray.push(item.title);\r",
+							"    urlsArray.push('https://coverartarchive.org/release-group/' + item.id);\r",
+							"  }\r",
+							"  albumsArray.length = urlsArray.length = 15;\r",
+							"  const images = [];\r",
+							"  let countDown = urlsArray.length;\r",
+							"  urlsArray.forEach((url, index) => {\r",
+							"    asynchronousCall(url, imageURL => {\r",
+							"      images[index] = imageURL;\r",
+							"      if (--countDown === 0) { // Callback for ALL starts on next line.\r",
+							"        clearTimeout(lock); // Unlock the timeout.\r",
+							"        const albumTitles = albumsArray.map(value => ({ title: value }));\r",
+							"        const albumImages = images.map(value => ({ image: value }));\r",
+							"        const albumsAndImages = albumTitles.map(\r",
+							"          (item, i) => Object.assign({}, item, albumImages[i]));\r",
+							"        const template = `<table>\r",
+							"          <tr><th>` + bandName + `</th></tr>\r",
+							"          {{#each responseI}}\r",
+							"          <tr><td>{{title}}<br><img src=\"{{image}}\"></td></tr>\r",
+							"          {{/each}}\r",
+							"        </table>`;\r",
+							"        pm.visualizer.set(template, { responseI: albumsAndImages });\r",
+							"      }\r",
+							"    });\r",
+							"  });\r",
+							"  function asynchronousCall (url, callback) {\r",
+							"    pm.sendRequest(url, (_, responseI) => {\r",
+							"      callback(responseI.json().images.find(obj => obj.front === true)\r",
+							"        .thumbnails.small); // Individual callback.\r",
+							"    });\r",
+							"  }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				},
+				"description": "### Display music band with album titles and front covers\n\nThis Postman Collection has a collection variable called MBID (MusicBrainz\n identifier of a band).  \nThe default MBID is that of the British rock band Coldplay,  \n`cc197bad-dc9c-440d-a5b5-d52ba2e14234`.  \n\nTo run the collection, do as follows:\n\n1. _Collections > MusicBands > Dummy-request > *Send*_.\n\n2. If you get the error `Something went wrong [...]`, try clicking **Send**\n again.  \nIf that does not help, try changing to some other MBID. (See below.)\n\n3. In the Postman Response Body, click Visualize.\n\n4. Done! – You should now see the output, displaying the band name and the 15\n first albums, each with its title and front cover.\n\n---\n\nTo change the MBID to some other music band, do as follows:\n\n1. _Collections > MusicBands > Variables_.\n\n2. For the variable MBID, change its **current value** to the new MBID.\n\n3. Click _Save_ to save the new settings of the _MusicBands_ collection.\n\n4. Click _Dummy-request > *Send*_ again to display the information of the new\n MBID.\n\n---\n\nHere are some more MBIDs to try for successful visualizing:\n* cc197bad-dc9c-440d-a5b5-d52ba2e14234  Coldplay (default)  \n* 4b585938-f271-45e2-b19a-91c634b5e396  Kate Bush  \n* 5b11f4ce-a62d-471e-81fc-a69a8278c7da  Nirvana  \n* 0383dadf-2a4e-4d10-a46a-e9e041da8eb3  Queen  \n* 83d91898-7763-47d7-b03b-b92132375c47  Pink  \n* a74b1b7f-71a5-4011-9441-d0b5e4122711  Radiohead  \n* f181961b-20f7-459e-89de-920ef03c7ed0  The  \n* 1a1cd7f3-e5df-4eca-bae2-2757c9e656b5  Duran  \n* 5b11f4ce-a62d-471e-81fc-a69a8278c7da  Vampire Weekend"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "MBID",
+			"value": "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
+		}
+	]
+}
