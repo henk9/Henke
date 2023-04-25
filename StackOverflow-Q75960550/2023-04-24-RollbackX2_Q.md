@@ -7,7 +7,6 @@ Here is [revision 1 of my question](https://stackoverflow.com/revisions/75960550
 And for your convenience, here is [the Markdown source of revision 1](https://stackoverflow.com/revisions/8de85fe0-b9f3-4be0-ab14-a8cf65081aa3/view-source).
 
 An editor made a rather extensive edit of my post that I didn't like, so I rolled it back.
- <sup>1</sup>
 
 ## Changes made by the editor that I disagree with
 
@@ -18,9 +17,9 @@ An editor made a rather extensive edit of my post that I didn't like, so I rolle
 3. Most of all, *he removed the very question I was asking* : \
 ***How can I *force* `package.json` to use version `2.1.1` of `nth-check`?*** \
 That's right.
-*My question no longer contains the question asked*. (!)
+*My question no longer contains the question I asked*. (!)
 
-The grande finale of the editor's actions was that he rolled back my rollback.
+I was already baffled by the above edit, when the editor rolled back my rollback.
 
 I've never experienced anything even remotely similar to these events.
 
@@ -33,7 +32,7 @@ Here is [the timeline of the post](https://stackoverflow.com/posts/75960550/time
 ### Background: some of my communication with the editor
 
 Since [comments are meant to be ephemeral](https://meta.stackexchange.com/a/312002), here are two of the question's comments.
- <sup>2</sup>
+ <sup>1</sup>
 
 Thanks for suggesting an edit to my question. However, I cannot accept an edit that *removes* the `package.json` from it. The `package.json` is what makes my post [a "minimal, complete and verifiable example"](https://stackoverflow.com/help/minimal-reproducible-example). Please don't suggest edits that remove such vital information! The [post](https://stackoverflow.com/q/15806152) that you suggest that my question is a duplicate of, is missing precisely this information. 
 – [Henke](https://stackoverflow.com/users/9213345)
@@ -48,8 +47,5 @@ The command you run already minimally reproduces it. If you'd like to go the oth
 <sup>
 
 <sup>1</sup>
-Ironically, the only upvote my question has received so far came *within seconds* after my rollback.
-
-<sup>2</sup>
 Including the comments here makes sure that [perpetual and irrevocable](https://stackoverflow.com/legal/terms-of-service#licensing) copies of them are retained at the site.
 </sup>
